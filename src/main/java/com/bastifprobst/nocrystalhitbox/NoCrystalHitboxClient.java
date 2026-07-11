@@ -4,7 +4,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
@@ -27,8 +26,11 @@ public class NoCrystalHitboxClient implements ClientModInitializer {
 	/**
 	 * Whether End Crystal hitboxes are currently shown.
 	 * {@code false} = hidden (this is the default / "hide active" state).
+	 *
+	 * <p>Read from the render thread (the hitbox mixin) and written from the client tick
+	 * thread, so it is {@code volatile}.</p>
 	 */
-	private static boolean showCrystalHitboxes = false;
+	private static volatile boolean showCrystalHitboxes = false;
 
 	/** Epoch millis until which the status message should be displayed. */
 	private static long messageUntilMs = 0L;
@@ -52,8 +54,8 @@ public class NoCrystalHitboxClient implements ClientModInitializer {
 			}
 		});
 
-		// Draw the crystal hitbox outlines (only while enabled).
-		WorldRenderEvents.AFTER_ENTITIES.register(CrystalHitboxRenderer::render);
+		// The actual hiding of End Crystal hitboxes happens in EntityHitboxDebugRendererMixin,
+		// which reads areHitboxesShown() while the vanilla F3 + B hitbox view is drawn.
 
 		// Draw the status message above the hotbar.
 		HudRenderCallback.EVENT.register(HitboxHud::render);

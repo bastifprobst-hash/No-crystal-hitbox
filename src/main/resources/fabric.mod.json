@@ -3,7 +3,7 @@
 	"id": "nocrystalhitbox",
 	"version": "${version}",
 	"name": "No Crystal Hitbox",
-	"description": "Toggle the rendering of End Crystal hitbox outlines with a key bind (default: H). Hitboxes are hidden by default. A short status message is shown above the hotbar for 5 seconds when toggled.",
+	"description": "Hides End Crystal hitboxes in the F3 + B debug hitbox view. Toggle with a key bind (default: H); hidden by default. A short status message is shown above the hotbar for 5 seconds when toggled.",
 	"authors": [
 		"bastifprobst-hash"
 	],
@@ -20,6 +20,9 @@
 			"com.bastifprobst.nocrystalhitbox.NoCrystalHitboxClient"
 		]
 	},
+	"mixins": [
+		"nocrystalhitbox.mixins.json"
+	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~1.21.11",
