@@ -4,9 +4,10 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -40,7 +41,7 @@ public class NoCrystalHitboxClient implements ClientModInitializer {
 				"key.nocrystalhitbox.toggle",
 				InputUtil.Type.KEYSYM,
 				GLFW.GLFW_KEY_H,
-				"category.nocrystalhitbox"
+				KeyBinding.Category.create(Identifier.of(MOD_ID, "general"))
 		));
 
 		// Detect key presses each client tick.
