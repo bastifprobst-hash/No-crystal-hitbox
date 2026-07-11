@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "nocrystalhitbox",
+	"version": "${version}",
+	"name": "No Crystal Hitbox",
+	"description": "Toggle the rendering of End Crystal hitbox outlines with a key bind (default: H). Hitboxes are hidden by default. A short status message is shown above the hotbar for 5 seconds when toggled.",
+	"authors": [
+		"bastifprobst-hash"
+	],
+	"contact": {
+		"homepage": "https://github.com/bastifprobst-hash/No-crystal-hitbox",
+		"sources": "https://github.com/bastifprobst-hash/No-crystal-hitbox",
+		"issues": "https://github.com/bastifprobst-hash/No-crystal-hitbox/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/nocrystalhitbox/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.bastifprobst.nocrystalhitbox.NoCrystalHitboxClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
