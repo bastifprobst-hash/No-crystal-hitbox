@@ -59,5 +59,12 @@ public final class CrystalHitboxRenderer {
 						-cam.x, -cam.y, -cam.z, COLOR, LINE_WIDTH);
 			}
 		}
+
+		// Flush our line layer straight away. We only reach this code while the feature is
+		// enabled, so on the frame the toggle is turned off nothing is emitted and the
+		// previously drawn outline cannot linger in the shared buffer.
+		if (consumers instanceof VertexConsumerProvider.Immediate immediate) {
+			immediate.draw(RenderLayers.lines());
+		}
 	}
 }
